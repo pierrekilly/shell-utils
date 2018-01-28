@@ -1,0 +1,30 @@
+#!/bin/bash
+
+tmpDir=$(mktemp -d /tmp/cmd2img-XXXXXXXXXX)
+fifoRasterize="${tmpDir}/rasterize.js"
+imgName="${HOME}/Pictures/$(date "+termshot-%Y%m%d-%H%M%S.png")"
+
+cat > ${fifoRasterize} <<MYEOF
+"use strict";
+var page = require('webpage').create();
+var fs = require('fs');
+var pageWidth = 1024;
+var pageHeight = 1024;
+
+page.viewportSize = { width: pageWidth, height: pageHeight };
+page.content = fs.read('/dev/stdin');
+
+window.setTimeout(function() {
+  page.render('/dev/stdout', { format: 'png' });
+  phantom.exit();
+}, 100);
+MYEOF
+
+ptybandage $* \
+	| tee /dev/tty \
+	| aha --black --word-wrap \
+	| phantomjs ${fifoRasterize} \
+	| convert -trim - ${imgName}
+
+rm -rf ${tmpDir}
+
