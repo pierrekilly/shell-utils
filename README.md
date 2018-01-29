@@ -7,13 +7,16 @@ You should feel free to use them but if you improve them, please let me know so 
 
 ## termshot
 
-This tool takes a "screenshot" of the output of a cli command.
+This tool takes a "screenshot" of the output of a cli command (including prompted messages and typed answers).
 
-Example:
+For example
+
 ```shell
 termshot ls -l --color=auto /
 ```
+
 gives this result:
+
 ![screenshot of terminal command, with colors](screenshots/termshot.png "Screenshot of a terminal command, with colors.")
 
 The image is saved in the `${HOME}/Pictures` folder and is timestamped.

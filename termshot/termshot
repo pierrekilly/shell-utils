@@ -8,8 +8,8 @@ cat > ${fifoRasterize} <<MYEOF
 "use strict";
 var page = require('webpage').create();
 var fs = require('fs');
-var pageWidth = 1024;
-var pageHeight = 1024;
+var pageWidth = 1280;
+var pageHeight = 1280;
 
 page.viewportSize = { width: pageWidth, height: pageHeight };
 page.content = fs.read('/dev/stdin');
