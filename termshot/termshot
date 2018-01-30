@@ -19,6 +19,8 @@ function help() {
 	echo "    --maxWidth|-w [width]       Limit the maximum outputed image's width to [width] pixels."
 	echo "                                Exceeding content is wrapped."
 	echo "                                Default: 1280"
+	echo "    --filename|-f [filename]    The file name to store the resulting image."
+	echo "                                Default: \$(date "+termshot-%Y%m%d-%H%M%S.png")"
 	echo "    --outputDir|-o [directory]  The folder where the resulting image will be stored."
 	echo "                                Default: \${HOME}/Pictures"
 	echo "    --help|-h                   Display this help."
@@ -44,6 +46,11 @@ do
 	case $1 in
 	-w|--maxWidth)
 		maxWidth=$2
+		shift # past argument
+		shift # past value
+	;;
+	-f|--filename)
+		imgFileName="$2"
 		shift # past argument
 		shift # past value
 	;;
