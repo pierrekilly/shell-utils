@@ -87,7 +87,7 @@ MYEOF
 
 imgName="${imgFolder}/${imgFileName}"
 
-ptybandage $* \
+ptybandage "$@" \
 	| tee /dev/tty \
 	| aha --black --word-wrap \
 	| phantomjs ${fifoRasterize} \
