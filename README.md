@@ -34,8 +34,9 @@ or just make use of `python`.
 
 Just copy this script in `/usr/bin/` and update python's symbolic links to point on it:
 ```
-sudo wget "https://raw.githubusercontent.com/pierrekilly/shell-utils/master/python-version-switcher/python-version-switcher.sh" -O /usr/bin/python-version-switcher.sh
-for link in idle pydoc python python-config; do sudo rm -f "$link"; sudo ln -s python-version-switcher.sh "$link"; done
+cd /usr/bin
+sudo wget https://raw.githubusercontent.com/pierrekilly/shell-utils/master/python-version-switcher/python-version-switcher.sh
+for link in idle pip pydoc python python-config; do sudo rm -f "$link"; sudo ln -s python-version-switcher.sh "$link"; done
 ```
 
 Then, when running a python program, you can specify which version of python you want to run it against by setting the `PYTHON_VERSION` environement variable:
