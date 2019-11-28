@@ -5,6 +5,7 @@ fifoRasterize="${tmpDir}/rasterize.js"
 imgFileName="$(date "+termshot-%Y%m%d-%H%M%S.png")"
 imgFolder="${HOME}/Pictures"
 maxWidth=1280
+bgColor="black"
 
 allOptionsParsed=false
 
@@ -23,6 +24,7 @@ function help() {
 	echo "                                Default: \$(date "+termshot-%Y%m%d-%H%M%S.png")"
 	echo "    --outputDir|-o [directory]  The folder where the resulting image will be stored."
 	echo "                                Default: \${HOME}/Pictures"
+	echo "    --light|-l                  Use a light background instead of the default black."
 	echo "    --help|-h                   Display this help."
 	echo
 	echo "Examples:"
@@ -59,6 +61,10 @@ do
 		shift # past argument
 		shift # past value
 	;;
+	-l|--light)
+		bgColor="pink"
+		shift # past argument
+	;;
 	-h|--help)
 		help
 		exit 0
@@ -89,7 +95,7 @@ imgName="${imgFolder}/${imgFileName}"
 
 ptybandage "$@" \
 	| tee /dev/tty \
-	| aha --black --word-wrap \
+	| aha --${bgColor} --word-wrap \
 	| phantomjs ${fifoRasterize} \
 	| convert -trim - ${imgName}
 
